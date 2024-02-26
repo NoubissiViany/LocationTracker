@@ -55,14 +55,17 @@ export default function Register() {
                   />
                 </div>
                 <div className="mt-5">
-                  <input type="checkbox" className="border border-gray-400 mr-2" />
+                  <input
+                    type="checkbox"
+                    className="border border-gray-400 mr-1"
+                  />
                   <span>
                     I accept the
-                    <a href="#" className="text-blue-900 font-semibold">
+                    <a href="#" className="text-blue-900 font-semibold mr-1">
                       Terms of use
                     </a>
                     &
-                    <a href="#" class="text-blue-900 font-semibold">
+                    <a href="#" class="text-blue-900 font-semibold ml-1">
                       Privacy Policy
                     </a>
                     .
