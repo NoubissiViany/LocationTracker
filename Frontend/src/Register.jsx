@@ -9,19 +9,19 @@ export default function Register() {
         <div className="container mx-auto">
           <div className="flex flex-col lg:flex-row w-10/12 lg:w-8/12 bg-white rounded-xl mx-auto shadow-xl overflow-hidden">
             <div className="sm:w-full lg:w-1/2 flex flex-col items-center justify-center p-12 bg-[url('./images/location.jpg')] bg-no-repeat bg-cover bg-center shadow-xl">
-              <h1 className="text-white text-3xl mb-3">Welcome</h1>
+              <h1 className="text-white text-4xl mb-3">Welcome</h1>
               <div>
-                <p className="text-white">to Location Tracker App</p>
+                <p className="text-yellow-300 text-3xl">to Location Tracker App</p>
               </div>
             </div>
             {/* registration form code */}
             <div className="w-full lg:w-1/2 py-16 px-12">
-              <h2 className="text-3xl mb-4">Register</h2>
-              <p className="mb-4">
+              <h2 className="text-4xl mb-4">Register</h2>
+              <p className="mb-4 text-sm">
                 Create an account. It's free and only take a minute
               </p>
               <form action="#">
-                <div class="grid grid-cols-2 gap-5">
+                <div class="grid grid-cols-2 gap-5 text-sm-bold">
                   <input
                     type="text"
                     placeholder="Firstname"
@@ -33,21 +33,21 @@ export default function Register() {
                     className="border border-gray-400 p-2 rounded-md"
                   />
                 </div>
-                <div className="mt-5">
+                <div className="mt-5 text-sm-bold">
                   <input
                     type="email"
                     placeholder="Email Address"
                     className="border border-gray-400 p-2 w-full rounded-md"
                   />
                 </div>
-                <div className="mt-5">
+                <div className="mt-5 text-sm-bold">
                   <input
                     type="password"
                     placeholder="Password"
                     className="border border-gray-400 p-2 w-full rounded-md"
                   />
                 </div>
-                <div className="mt-5">
+                <div className="mt-5 text-sm-bold">
                   <input
                     type="password"
                     placeholder="Confirm Password"
@@ -59,9 +59,9 @@ export default function Register() {
                     type="checkbox"
                     className="border border-gray-400 mr-1"
                   />
-                  <span>
-                    I accept the
-                    <a href="#" className="text-blue-900 font-semibold mr-1">
+                  <span className="text-sm-bold">
+                    I accept
+                    the  <a href="#" className="text-blue-900 font-semibold mr-1">
                       Terms of use
                     </a>
                     &
@@ -72,13 +72,13 @@ export default function Register() {
                   </span>
                 </div>
 
-                <div className="mt-5">
+                <div className="mt-5 text-sm">
                   <button className="w-full bg-blue-500 py-3 text-center text-white rounded-md">
                     Register Now
                   </button>
                 </div>
 
-                <div className="mt-5 text-center">
+                <div className="mt-5 text-center text-sm-bold">
                   <span>
                     Already have an account?
                     <Link to="/" className="text-blue-900 font-semibold ml-1">
