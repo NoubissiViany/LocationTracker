@@ -1,7 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 export default function Register() {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const data = new FormData(event.target);
+    const formObject = Object.fromEntries(data.entries());
+    const username = `${formObject.firstName} ${formObject.lastName} `;
+    delete formObject.firstName;
+    delete formObject.lastName;
+    await axios.post("http://localhost:3000/api/sign-up", {
+      ...formObject,
+      username: username,
+    });
+    alert("Data created successfully!");
+    event.target.reset();
+  };
+
   return (
     <>
       {/*   Background image and header code */}
@@ -20,15 +36,17 @@ export default function Register() {
               <p className="mb-4">
                 Create an account. It's free and only take a minute
               </p>
-              <form action="#">
-                <div class="grid grid-cols-2 gap-5">
+              <form onSubmit={handleSubmit}>
+                <div className="grid grid-cols-2 gap-5">
                   <input
                     type="text"
+                    name="firstName"
                     placeholder="Firstname"
                     className="border border-gray-400 p-2 rounded-md"
                   />
                   <input
                     type="text"
+                    name="lastName"
                     placeholder="Lastname"
                     className="border border-gray-400 p-2 rounded-md"
                   />
@@ -36,6 +54,7 @@ export default function Register() {
                 <div className="mt-5">
                   <input
                     type="email"
+                    name="email"
                     placeholder="Email Address"
                     className="border border-gray-400 p-2 w-full rounded-md"
                   />
@@ -43,6 +62,7 @@ export default function Register() {
                 <div className="mt-5">
                   <input
                     type="password"
+                    name="password"
                     placeholder="Password"
                     className="border border-gray-400 p-2 w-full rounded-md"
                   />
@@ -50,6 +70,7 @@ export default function Register() {
                 <div className="mt-5">
                   <input
                     type="password"
+                    name="password_repeat"
                     placeholder="Confirm Password"
                     className="border border-gray-400 p-2 w-full rounded-md"
                   />
@@ -65,7 +86,7 @@ export default function Register() {
                       Terms of use
                     </a>
                     &
-                    <a href="#" class="text-blue-900 font-semibold ml-1">
+                    <a href="#" className="text-blue-900 font-semibold ml-1">
                       Privacy Policy
                     </a>
                     .
@@ -73,7 +94,10 @@ export default function Register() {
                 </div>
 
                 <div className="mt-5">
-                  <button className="w-full bg-blue-500 py-3 text-center text-white rounded-md">
+                  <button
+                    type="submit"
+                    className="w-full bg-blue-500 py-3 text-center text-white rounded-md"
+                  >
                     Register Now
                   </button>
                 </div>
