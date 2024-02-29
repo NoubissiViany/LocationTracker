@@ -7,16 +7,16 @@ const db = require("../db/db.js");
 const userMiddleware = require("../middleware/users.js");
 router.post("/sign-up", userMiddleware.validateRegister, (req, res, next) => {
   db.query(
-    "SELECT id FROM users WHERE LOWER(username) = LOWER(?)",
-    [req.body.username],
+    "SELECT id FROM users WHERE LOWER(email) = LOWER(?)",
+    [req.body.email],
     (err, result) => {
       if (result && result.length) {
         // error
         return res.status(409).send({
-          message: "This username is already in use!",
+          message: "This email is already in use!",
         });
       } else {
-        // username not in use
+        // email not in use
         bcrypt.hash(req.body.password, 10, (err, hash) => {
           if (err) {
             return res.status(500).send({
@@ -45,8 +45,8 @@ router.post("/sign-up", userMiddleware.validateRegister, (req, res, next) => {
 });
 router.post("/login", (req, res, next) => {
   db.query(
-    `SELECT * FROM users WHERE username = ?;`,
-    [req.body.username],
+    `SELECT * FROM users WHERE email = ?;`,
+    [req.body.email],
     (err, result) => {
       if (err) {
         return res.status(400).send({
@@ -55,7 +55,7 @@ router.post("/login", (req, res, next) => {
       }
       if (!result.length) {
         return res.status(400).send({
-          message: "Username or password incorrect!",
+          message: "Email or password incorrect!",
         });
       }
       bcrypt.compare(
@@ -64,7 +64,7 @@ router.post("/login", (req, res, next) => {
         (bErr, bResult) => {
           if (bErr) {
             return res.status(400).send({
-              message: "Username or password incorrect!",
+              message: "Email or password incorrect!",
             });
           }
           if (bResult) {
@@ -87,7 +87,7 @@ router.post("/login", (req, res, next) => {
             });
           }
           return res.status(400).send({
-            message: "Username or password incorrect!",
+            message: "Email or password incorrect!",
           });
         }
       );
