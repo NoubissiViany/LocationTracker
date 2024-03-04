@@ -1,7 +1,45 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { toast, Bounce } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Register() {
+  const [response, setResponse] = useState("");
+  const navigate = useNavigate();
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const data = new FormData(event.target);
+    const formObject = Object.fromEntries(data.entries());
+    const username = `${formObject.firstName} ${formObject.lastName} `;
+    delete formObject.firstName;
+    delete formObject.lastName;
+    try {
+      await axios.post("http://localhost:3000/api/sign-up", {
+        ...formObject,
+        username: username,
+      });
+      toast.success("User created successfully!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
+      setResponse("");
+      event.target.reset();
+      navigate("/");
+    } catch (error) {
+      console.log("Error", error);
+      setResponse(error.response.data.message);
+    }
+  };
+
   return (
     <>
       {/*   Background image and header code */}
@@ -9,63 +47,82 @@ export default function Register() {
         <div className="container mx-auto">
           <div className="flex flex-col lg:flex-row w-10/12 lg:w-8/12 bg-white rounded-xl mx-auto shadow-xl overflow-hidden">
             <div className="sm:w-full lg:w-1/2 flex flex-col items-center justify-center p-12 bg-[url('./images/location.jpg')] bg-no-repeat bg-cover bg-center shadow-xl">
-              <h1 className="text-white text-4xl mb-3">Welcome</h1>
-              <div>
-                <p className="text-yellow-300 text-3xl">to Location Tracker App</p>
+              <div className="bg-black bg-opacity-50 p-10 text-white text-center">
+                <h1 className="text-4xl">
+                  Welcome <br /> to
+                </h1>
+                <p className="text-3xl whitespace-nowrap max-[425px]:whitespace-normal ">
+                  Location Tracker App
+                </p>
               </div>
             </div>
+
             {/* registration form code */}
             <div className="w-full lg:w-1/2 py-16 px-12">
               <h2 className="text-4xl mb-4">Register</h2>
               <p className="mb-4 text-sm">
                 Create an account. It's free and only take a minute
               </p>
-              <form action="#">
-                <div class="grid grid-cols-2 gap-5 text-sm-bold">
+              <form onSubmit={handleSubmit}>
+                <div className="grid grid-cols-2 gap-5 text-sm-bold">
                   <input
                     type="text"
+                    name="firstName"
                     placeholder="Firstname"
                     className="border border-gray-400 p-2 rounded-md"
+                    required
                   />
                   <input
                     type="text"
+                    name="lastName"
                     placeholder="Lastname"
                     className="border border-gray-400 p-2 rounded-md"
+                    required
                   />
                 </div>
                 <div className="mt-5 text-sm-bold">
                   <input
                     type="email"
+                    name="email"
                     placeholder="Email Address"
                     className="border border-gray-400 p-2 w-full rounded-md"
+                    required
                   />
                 </div>
                 <div className="mt-5 text-sm-bold">
                   <input
                     type="password"
+                    name="password"
                     placeholder="Password"
                     className="border border-gray-400 p-2 w-full rounded-md"
+                    required
                   />
                 </div>
                 <div className="mt-5 text-sm-bold">
                   <input
                     type="password"
+                    name="password_repeat"
                     placeholder="Confirm Password"
                     className="border border-gray-400 p-2 w-full rounded-md"
+                    required
                   />
+                </div>
+                <div className="mt-5 text-sm-bold text-red-600">
+                  {response && <p>{response}</p>}
                 </div>
                 <div className="mt-5">
                   <input
                     type="checkbox"
                     className="border border-gray-400 mr-1"
+                    required
                   />
                   <span className="text-sm-bold">
-                    I accept
-                    the  <a href="#" className="text-blue-900 font-semibold mr-1">
+                    I accept the
+                    <a href="#" className="text-blue-900 font-semibold mr-1">
                       Terms of use
                     </a>
                     &
-                    <a href="#" class="text-blue-900 font-semibold ml-1">
+                    <a href="#" className="text-blue-900 font-semibold ml-1">
                       Privacy Policy
                     </a>
                     .
@@ -73,7 +130,10 @@ export default function Register() {
                 </div>
 
                 <div className="mt-5 text-sm">
-                  <button className="w-full bg-blue-500 py-3 text-center text-white rounded-md">
+                  <button
+                    type="submit"
+                    className="w-full bg-blue-500 py-3 text-center text-white rounded-md"
+                  >
                     Register Now
                   </button>
                 </div>
