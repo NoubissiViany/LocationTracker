@@ -117,7 +117,7 @@ export default function Register() {
                     required
                   />
                   <span className="text-sm-bold">
-                    I accept the{" "}
+                    I accept the
                     <a href="#" className="text-blue-900 font-semibold mr-1">
                       Terms of use
                     </a>
