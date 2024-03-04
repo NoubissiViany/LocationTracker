@@ -1,15 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { toast, Bounce } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Login() {
+  const [response, setResponse] = useState("");
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.target);
     const formObject = Object.fromEntries(data.entries());
-    await axios.post("http://localhost:3000/api/login", { ...formObject });
-    alert("Successfully login!");
-    event.target.reset();
+    try {
+      await axios.post("http://localhost:3000/api/login", { ...formObject });
+      toast.success("Successfully login!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
+      setResponse("");
+      event.target.reset();
+    } catch (error) {
+      console.error("Error:", error);
+      setResponse(error.response.data.message);
+    }
   };
   return (
     <>
@@ -19,36 +39,40 @@ export default function Login() {
             {/* login form code */}
             <div className="w-full lg:w-1/2 py-16 px-12">
               <h2 className="text-3xl mb-4">Login</h2>
-              <p className="mb-4">Tracking made easy!</p>
+              <p className="mb-4 text-sm">Tracking made easy!</p>
               <form onSubmit={handleSubmit}>
-                <div className="mt-5">
+                <div className="mt-5 text-sm-bold">
                   <input
                     type="email"
                     name="email"
                     placeholder="Email Address"
                     className="border border-gray-400 p-2 w-full rounded-md"
+                    required
                   />
                 </div>
-                <div className="mt-5">
+                <div className="mt-5 text-sm-bold">
                   <input
                     type="password"
                     name="password"
                     placeholder="Password"
                     className="border border-gray-400 p-2 w-full rounded-md"
+                    required
                   />
                 </div>
-
+                <div className="mt-5 text-sm-bold text-red-600">
+                  {response && <p>{response}</p>}
+                </div>
                 <div className="mt-5">
                   <button
                     type="submit"
-                    className="w-full bg-blue-500 py-3 text-center text-white font-semibold rounded-md text-xl lg:text-sm"
+                    className="w-full bg-blue-500 py-3 text-center text-white font-semibold rounded-md text-sm lg:text-sm"
                   >
                     Login
                   </button>
                 </div>
 
                 <div className="mt-5 text-center">
-                  <span>
+                  <span className="text-sm-bold">
                     Don't have an account?
                     <Link
                       to="/registration"
@@ -62,9 +86,13 @@ export default function Login() {
             </div>
             {/*   Background image and header code */}
             <div className="sm:w-full lg:w-1/2 flex flex-col items-center justify-center p-12 bg-[url('./images/location2.jpg')] bg-no-repeat bg-cover bg-center shadow-xl">
-              <h1 className="text-white text-3xl mb-3">Location Tracker App</h1>
-              <div>
-                <p className="text-white">Technology meets Destination</p>
+              <div className="bg-black bg-opacity-50 p-5">
+                <h1 className="text-white text-4xl mb-3 whitespace-nowrap max-[425px]:text-center max-[425px]:whitespace-normal">
+                  Location Tracker App
+                </h1>
+                <p className="text-white text-center text-xl">
+                  Technology meets Destination
+                </p>
               </div>
             </div>
           </div>
