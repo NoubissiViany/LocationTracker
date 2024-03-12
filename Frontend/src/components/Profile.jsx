@@ -1,4 +1,3 @@
-// src/components/Profile.js
 import React, { useState } from 'react';
 
 function Profile() {

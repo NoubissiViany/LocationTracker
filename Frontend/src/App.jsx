@@ -2,7 +2,6 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./Login";
 import Register from "./Register";
-import Dashboard from "./components/Dashboard";
 import Profile from "./components/Profile";
 import LocationHistory from "./components/LocationHistory";
 import Sidebar from "./components/Sidebar";
@@ -15,7 +14,6 @@ export default function App() {
         <Routes>
           {/* <Route index element={<Login />} />
           <Route path="/registration" element={<Register />} /> */}
-          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/location-history" element={<LocationHistory />} />
         </Routes>
