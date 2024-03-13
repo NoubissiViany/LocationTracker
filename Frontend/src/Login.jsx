@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function Login() {
   const [response, setResponse] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -26,6 +27,7 @@ export default function Login() {
       });
       setResponse("");
       event.target.reset();
+      navigate("/location-history");
     } catch (error) {
       console.error("Error:", error);
       setResponse(error.response.data.message);
