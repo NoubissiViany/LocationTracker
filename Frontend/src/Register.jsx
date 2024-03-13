@@ -33,7 +33,7 @@ export default function Register() {
       });
       setResponse("");
       event.target.reset();
-      navigate("/");
+      navigate("/location-history");
     } catch (error) {
       console.log("Error", error);
       setResponse(error.response.data.message);
