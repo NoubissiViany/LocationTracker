@@ -22,13 +22,13 @@ const LocationHistory = () => (
       <ul>
         <li className="flex items-center mb-1 hover:bg-indigo-400 p-1 rounded">
           <RiHistoryFill className="mr-1" size={20} />
-          <Link to="/location-history" className="hover:underline">
+          <Link to="/home/location-history" className="hover:underline">
             Location History
           </Link>
         </li>
         <li className="flex items-center mb-1 hover:bg-indigo-400 p-1 rounded">
           <CgProfile className="mr-1" size={20} />
-          <Link to="/profile" className="hover:underline">
+          <Link to="/home/profile" className="hover:underline">
             Profile
           </Link>
         </li>

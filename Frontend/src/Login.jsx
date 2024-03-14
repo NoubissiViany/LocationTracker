@@ -27,7 +27,7 @@ export default function Login() {
       });
       setResponse("");
       event.target.reset();
-      navigate("/location-history");
+      navigate("/home");
     } catch (error) {
       console.error("Error:", error);
       setResponse(error.response.data.message);
