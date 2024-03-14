@@ -6,6 +6,7 @@ import Sidebar from "./components/Sidebar";
 import Login from "./Login";
 import Register from "./Register";
 import { ToastContainer } from "react-toastify";
+import MapLocation from "./components/MapLocation";
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
         <Routes>
           <Route path="/profile" element={<Profile />} />
           <Route path="/location-history" element={<LocationHistory />} />
+          <Route path="/map-location" element={<MapLocation />} />
         </Routes>
       </div>
       <ToastContainer />

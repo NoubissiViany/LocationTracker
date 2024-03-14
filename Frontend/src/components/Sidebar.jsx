@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { SlLocationPin } from "react-icons/sl";
 import { CgProfile } from "react-icons/cg";
 import { RiHistoryFill } from "react-icons/ri";
+import { BiMapPin } from "react-icons/bi";
 
 // Move icon imports outside the component function
 
@@ -20,6 +21,12 @@ const LocationHistory = () => (
         </span>
       </div>
       <ul>
+        <li className="flex items-center mb-1 hover:bg-indigo-400 p-1 rounded">
+            <BiMapPin className="mr-1" size={20}/>
+          <Link to="/map-location" className="hover:underline">
+            Map Location
+          </Link>
+        </li>
         <li className="flex items-center mb-1 hover:bg-indigo-400 p-1 rounded">
           <RiHistoryFill className="mr-1" size={20} />
           <Link to="/location-history" className="hover:underline">
