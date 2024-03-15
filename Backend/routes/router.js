@@ -94,4 +94,99 @@ router.post("/login", (req, res, next) => {
     }
   );
 });
+router.get("/user/:id", (req, res, next) => {
+  const userId = req.params.id;
+
+  db.query(`SELECT * FROM users WHERE id = ?;`, [userId], (err, result) => {
+    if (err) {
+      return res.status(400).send({
+        message: err,
+      });
+    }
+    if (!result.length) {
+      return res.status(404).send({
+        message: "User not found!",
+      });
+    }
+    return res.status(200).send({
+      user: result[0],
+    });
+  });
+});
+router.put("/user/:id", (req, res, next) => {
+  const userId = req.params.id;
+  const updatedUser = req.body; // Assuming the updated user details are sent in the request body
+
+  // Generate a bcrypt hash of the updated password
+  bcrypt.hash(updatedUser.password, 10, (err, hashedPassword) => {
+    if (err) {
+      return res.status(500).send({
+        message: "Error encrypting password!",
+      });
+    }
+
+    // Update the updatedUser object with the hashed password
+    updatedUser.password = hashedPassword;
+
+    db.query(
+      `UPDATE users SET ? WHERE id = ?;`,
+      [updatedUser, userId],
+      (err, result) => {
+        if (err) {
+          return res.status(400).send({
+            message: err,
+          });
+        }
+
+        if (result.affectedRows === 0) {
+          return res.status(404).send({
+            message: "User not found!",
+          });
+        }
+
+        return res.status(200).send({
+          message: "User updated successfully!",
+        });
+      }
+    );
+  });
+});
+router.post("/create-post-location", (req, res, next) => {
+  const { lat, lng, userId } = req.body;
+
+  // Save the latitude and longitude information to the database
+  db.query(
+    "INSERT INTO post_locations (id, user_id, latitude, longitude) VALUES (?, ?, ?, ?)",
+    [uuid.v4(), userId, lat, lng],
+    (err, result) => {
+      if (err) {
+        return res.status(500).send({
+          message: err,
+        });
+      }
+      return res.status(201).send({
+        message: "Post location created!",
+      });
+    }
+  );
+});
+router.get("/get-locations/:id", (req, res, next) => {
+  const userId = req.params.id;
+
+  // Retrieve all locations for the specified user ID from the database
+  db.query(
+    "SELECT * FROM post_locations WHERE user_id = ?",
+    [userId],
+    (err, results) => {
+      if (err) {
+        return res.status(500).send({
+          message: err,
+        });
+      }
+      return res.status(200).send({
+        locations: results,
+      });
+    }
+  );
+});
 module.exports = router;

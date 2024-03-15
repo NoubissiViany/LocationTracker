@@ -5,8 +5,6 @@ import { CgProfile } from "react-icons/cg";
 import { RiHistoryFill } from "react-icons/ri";
 import { BiMapPin } from "react-icons/bi";
 
-// Move icon imports outside the component function
-
 const LocationHistory = () => (
   <div className="h-screen w-72 p-4">
     <nav>
@@ -22,20 +20,20 @@ const LocationHistory = () => (
       </div>
       <ul>
         <li className="flex items-center mb-1 hover:bg-indigo-400 p-1 rounded">
-            <BiMapPin className="mr-1" size={20}/>
-          <Link to="/map-location" className="hover:underline">
+          <BiMapPin className="mr-1" size={20} />
+          <Link to="home/map-location" className="hover:underline">
             Map Location
           </Link>
         </li>
         <li className="flex items-center mb-1 hover:bg-indigo-400 p-1 rounded">
           <RiHistoryFill className="mr-1" size={20} />
-          <Link to="/location-history" className="hover:underline">
+          <Link to="home/location-history" className="hover:underline">
             Location History
           </Link>
         </li>
         <li className="flex items-center mb-1 hover:bg-indigo-400 p-1 rounded">
           <CgProfile className="mr-1" size={20} />
-          <Link to="/profile" className="hover:underline">
+          <Link to="home/profile" className="hover:underline">
             Profile
           </Link>
         </li>
