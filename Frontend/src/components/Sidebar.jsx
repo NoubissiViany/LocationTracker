@@ -22,19 +22,19 @@ const Sidebar = () => (
       <ul className=" bg-purple-900 rounded-xl m-2 h-screen pt-2 text-white">
         <li className="flex items-center mb-1 hover:bg-white hover:text-purple-800 p-1 m-2 rounded">
             <BiMapPin className="mr-1" size={20}/>
-          <Link to="/map-location">
+          <Link to="/home/map-location">
             Map Location
           </Link>
         </li>
         <li className="flex items-center mb-1 hover:bg-white hover:text-purple-800 p-1 m-2 rounded">
           <RiHistoryFill className="mr-1" size={20} />
-          <Link to="/location-history">
+          <Link to="/home/location-history">
             Location History
           </Link>
         </li>
         <li className="flex items-center mb-1 hover:bg-white hover:text-purple-800 p-1 m-2 rounded">
           <CgProfile className="mr-1" size={20} />
-          <Link to="/profile">
+          <Link to="/home/profile">
             Profile
           </Link>
         </li>
