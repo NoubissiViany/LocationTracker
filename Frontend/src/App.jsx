@@ -1,9 +1,12 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import Login from "./Login";
 import Register from "./Register";
+import Sidebar from "./components/Sidebar";
+import Profile from "./components/Profile";
+import LocationHistory from "./components/LocationHistory";
+import MapLocation from "./components/MapLocation";
 import { ToastContainer } from "react-toastify";
-import Home from "./components/Home";
 
 export default function App() {
   return (
@@ -11,7 +14,18 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/registration" element={<Register />} />
-        <Route path="/home/*" element={<Home />} />
+        <Route
+          element={
+            <div className="flex font-mono">
+              <Sidebar />
+              <Outlet />
+            </div>
+          }
+        >
+          <Route path="home/profile" element={<Profile />} />
+          <Route path="home/location-history" element={<LocationHistory />} />
+          <Route path="home/map-location" element={<MapLocation />} />
+        </Route>
       </Routes>
       <ToastContainer />
     </BrowserRouter>
