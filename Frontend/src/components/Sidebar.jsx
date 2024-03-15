@@ -5,8 +5,9 @@ import { CgProfile } from "react-icons/cg";
 import { RiHistoryFill } from "react-icons/ri";
 import { BiMapPin } from "react-icons/bi";
 
-const LocationHistory = () => (
-  <div className="h-screen w-72 p-4">
+
+const Sidebar = () => (
+  <div className="h-screen w-72 p-2 pt-6">
     <nav>
       <div className="flex items-center mb-6">
         <SlLocationPin
@@ -14,26 +15,26 @@ const LocationHistory = () => (
           size={24}
           style={{ color: "#9333EA" }}
         />
-        <span className="text-xl font-semibold font-sans text-purple-600">
+        <span className="text-xl font-semibold font-sans text-purple-800">
           Location Tracker
         </span>
       </div>
-      <ul>
-        <li className="flex items-center mb-1 hover:bg-indigo-400 p-1 rounded">
-          <BiMapPin className="mr-1" size={20} />
-          <Link to="home/map-location" className="hover:underline">
+      <ul className=" bg-purple-900 rounded-xl m-2 h-screen pt-2 text-white">
+        <li className="flex items-center mb-1 hover:bg-white hover:text-purple-800 p-1 m-2 rounded">
+            <BiMapPin className="mr-1" size={20}/>
+          <Link to="/map-location">
             Map Location
           </Link>
         </li>
-        <li className="flex items-center mb-1 hover:bg-indigo-400 p-1 rounded">
+        <li className="flex items-center mb-1 hover:bg-white hover:text-purple-800 p-1 m-2 rounded">
           <RiHistoryFill className="mr-1" size={20} />
-          <Link to="home/location-history" className="hover:underline">
+          <Link to="/location-history">
             Location History
           </Link>
         </li>
-        <li className="flex items-center mb-1 hover:bg-indigo-400 p-1 rounded">
+        <li className="flex items-center mb-1 hover:bg-white hover:text-purple-800 p-1 m-2 rounded">
           <CgProfile className="mr-1" size={20} />
-          <Link to="home/profile" className="hover:underline">
+          <Link to="/profile">
             Profile
           </Link>
         </li>
@@ -42,4 +43,4 @@ const LocationHistory = () => (
   </div>
 );
 
-export default LocationHistory;
+export default Sidebar;
