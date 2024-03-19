@@ -4,8 +4,6 @@ import { SlLocationPin } from "react-icons/sl";
 import { CgProfile } from "react-icons/cg";
 import { RiHistoryFill } from "react-icons/ri";
 import { BiMapPin } from "react-icons/bi";
-import { VscSignOut } from "react-icons/vsc";
-
 
 const Sidebar = () => (
   <div className="h-screen w-72 p-2 pt-6">
@@ -22,29 +20,16 @@ const Sidebar = () => (
       </div>
       <ul className=" bg-purple-900 rounded-xl m-2 h-screen pt-2 text-white">
         <li className="flex items-center mb-1 hover:bg-white hover:text-purple-800 p-1 m-2 rounded">
-            <BiMapPin className="mr-1" size={20}/>
-          <Link to="/map-location">
-            Map Location
-          </Link>
+          <BiMapPin className="mr-1" size={20} />
+          <Link to="home/map-location">Map Location</Link>
         </li>
         <li className="flex items-center mb-1 hover:bg-white hover:text-purple-800 p-1 m-2 rounded">
           <RiHistoryFill className="mr-1" size={20} />
-          <Link to="/location-history">
-            Location History
-          </Link>
+          <Link to="home/location-history">Location History</Link>
         </li>
         <li className="flex items-center mb-3 hover:bg-white hover:text-purple-800 p-1 m-2 rounded">
           <CgProfile className="mr-1" size={20} />
-          <Link to="/profile">
-            Profile
-          </Link>
-        </li>
-
-        <li>
-          <button className="flex items-center w-full bg-red-600 hover:bg-white hover:text-red-600 p-1 my-1 rounded">
-            <VscSignOut className="mr-1" size={20}/>
-            Sign Out 
-            </button>
+          <Link to="home/profile">Profile</Link>
         </li>
       </ul>
     </nav>
