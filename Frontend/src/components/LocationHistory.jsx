@@ -11,7 +11,7 @@ function LocationHistory() {
     const fetchLocation = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/get-locations/${userId}`
+          `https://locationtracker-rr5q.onrender.com/api/get-locations/${userId}`
         );
         setLocationData(response.data.locations);
         setLoading(false);

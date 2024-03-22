@@ -27,7 +27,7 @@ const MapLocation = () => {
       // Send location data to the endpoint using axios
       try {
         const response = await axios.post(
-          "http://localhost:3000/api/create-post-location",
+          "https://locationtracker-rr5q.onrender.com/api/create-post-location",
           { lat, lng, userId }
         );
         toast.success("Position saved!", {

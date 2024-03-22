@@ -16,7 +16,7 @@ function Profile() {
     const fetchUser = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/user/${userId}`
+          `https://locationtracker-rr5q.onrender.com/api/user/${userId}`
         );
         setFormData({
           ...formData,
@@ -43,7 +43,7 @@ function Profile() {
     event.preventDefault();
     try {
       const response = await axios.put(
-        `http://localhost:3000/api/user/${userId}`,
+        `https://locationtracker-rr5q.onrender.com/api/user/${userId}`,
         formData
       );
       toast.success("User updated successfully!", {
