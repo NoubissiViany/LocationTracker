@@ -16,7 +16,7 @@ export default function Login() {
     const data = new FormData(event.target);
     const formObject = Object.fromEntries(data.entries());
     try {
-      const response = await axios.post("http://localhost:3000/api/login", {
+      const response = await axios.post("https://locationtracker-rr5q.onrender.com/api/login", {
         ...formObject,
       });
       const responseData = response.data;

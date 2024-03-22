@@ -19,7 +19,7 @@ export default function Register() {
     delete formObject.firstName;
     delete formObject.lastName;
     try {
-      await axios.post("http://localhost:3000/api/sign-up", {
+      await axios.post("https://locationtracker-rr5q.onrender.com/api/sign-up", {
         ...formObject,
         username: username,
       });
