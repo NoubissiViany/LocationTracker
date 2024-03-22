@@ -4,6 +4,7 @@ import axios from "axios";
 import { toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Loader from "./components/Loader";
+import location from "../images/location.jpg";
 
 export default function Register() {
   const [response, setResponse] = useState("");
@@ -53,7 +54,7 @@ export default function Register() {
         <div className="min-h-screen py-40 flex items-center justify-center bg-gradient-to-r from-blue-900">
           <div className="container mx-auto">
             <div className="flex flex-col lg:flex-row w-10/12 lg:w-8/12 bg-white rounded-xl mx-auto shadow-xl overflow-hidden">
-              <div className="sm:w-full lg:w-1/2 flex flex-col items-center justify-center p-12 bg-[url('./images/location.jpg')] bg-no-repeat bg-cover bg-center shadow-xl">
+            <div className={`sm:w-full lg:w-1/2 flex flex-col items-center justify-center p-12`} style={{ backgroundImage: `url(${location})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundPosition: 'center', boxShadow: 'xl' }}>
                 <div className="bg-black bg-opacity-50 p-10 text-white text-center">
                   <h1 className="text-4xl">
                     Welcome <br /> to

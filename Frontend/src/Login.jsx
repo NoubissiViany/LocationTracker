@@ -4,6 +4,7 @@ import axios from "axios";
 import { toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Loader from "./components/Loader";
+import location2 from "../images/location2.jpg";
 
 export default function Login() {
   const [response, setResponse] = useState("");
@@ -16,9 +17,12 @@ export default function Login() {
     const data = new FormData(event.target);
     const formObject = Object.fromEntries(data.entries());
     try {
-      const response = await axios.post("https://locationtracker-rr5q.onrender.com/api/login", {
-        ...formObject,
-      });
+      const response = await axios.post(
+        "https://locationtracker-rr5q.onrender.com/api/login",
+        {
+          ...formObject,
+        }
+      );
       const responseData = response.data;
       toast.success("Successfully login!", {
         position: "top-right",
@@ -99,7 +103,7 @@ export default function Login() {
                 </form>
               </div>
               {/*   Background image and header code */}
-              <div className="sm:w-full lg:w-1/2 flex flex-col items-center justify-center p-12 bg-[url('./images/location2.jpg')] bg-no-repeat bg-cover bg-center shadow-xl">
+              <div className={`sm:w-full lg:w-1/2 flex flex-col items-center justify-center p-12`} style={{ backgroundImage: `url(${location2})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundPosition: 'center', boxShadow: 'xl' }}>
                 <div className="bg-black bg-opacity-50 p-5">
                   <h1 className="text-white text-4xl mb-3 whitespace-nowrap max-[425px]:text-center max-[425px]:whitespace-normal">
                     Location Tracker App
