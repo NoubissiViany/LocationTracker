@@ -156,7 +156,7 @@ router.post("/create-post-location", (req, res, next) => {
 
   // Save the latitude and longitude information to the database
   db.query(
-    "INSERT INTO post_locations (id, user_id, latitude, longitude) VALUES (?, ?, ?, ?)",
+    "INSERT INTO post_locations (id, user_id, latitude, longitude, date) VALUES (?, ?, ?, ?, now())",
     [uuid.v4(), userId, lat, lng],
     (err, result) => {
       if (err) {
