@@ -5,6 +5,8 @@ const uuid = require("uuid");
 const jwt = require("jsonwebtoken");
 const db = require("../db/db.js");
 const userMiddleware = require("../middleware/users.js");
+const currentDateTime = new Date().toLocaleString();
+
 router.post("/sign-up", userMiddleware.validateRegister, (req, res, next) => {
   db.query(
     "SELECT id FROM users WHERE LOWER(email) = LOWER(?)",
@@ -24,8 +26,14 @@ router.post("/sign-up", userMiddleware.validateRegister, (req, res, next) => {
             });
           } else {
             db.query(
-              "INSERT INTO users (id, username, email, password, registered) VALUES (?, ?, ?, ?, now());",
-              [uuid.v4(), req.body.username, req.body.email, hash],
+              "INSERT INTO users (id, username, email, password, registered) VALUES (?, ?, ?, ?, ?);",
+              [
+                uuid.v4(),
+                req.body.username,
+                req.body.email,
+                hash,
+                currentDateTime,
+              ],
               (err, result) => {
                 if (err) {
                   return res.status(400).send({
@@ -43,6 +51,7 @@ router.post("/sign-up", userMiddleware.validateRegister, (req, res, next) => {
     }
   );
 });
+
 router.post("/login", (req, res, next) => {
   db.query(
     `SELECT * FROM users WHERE email = ?;`,
@@ -77,9 +86,10 @@ router.post("/login", (req, res, next) => {
               "SECRETKEY",
               { expiresIn: "7d" }
             );
-            db.query(`UPDATE users SET last_login = now() WHERE id = ?;`, [
-              result[0].id,
-            ]);
+            db.query(
+              `UPDATE users SET last_login = ${currentDateTime} WHERE id = ?;`,
+              [result[0].id]
+            );
             return res.status(200).send({
               message: "Logged in!",
               token,
@@ -94,6 +104,7 @@ router.post("/login", (req, res, next) => {
     }
   );
 });
+
 router.get("/user/:id", (req, res, next) => {
   const userId = req.params.id;
 
@@ -113,6 +124,7 @@ router.get("/user/:id", (req, res, next) => {
     });
   });
 });
+
 router.put("/user/:id", (req, res, next) => {
   const userId = req.params.id;
   const updatedUser = req.body; // Assuming the updated user details are sent in the request body
@@ -151,13 +163,14 @@ router.put("/user/:id", (req, res, next) => {
     );
   });
 });
+
 router.post("/create-post-location", (req, res, next) => {
   const { lat, lng, userId } = req.body;
 
   // Save the latitude and longitude information to the database
   db.query(
-    "INSERT INTO post_locations (id, user_id, latitude, longitude, date) VALUES (?, ?, ?, ?, now())",
-    [uuid.v4(), userId, lat, lng],
+    "INSERT INTO post_locations (id, user_id, latitude, longitude, date) VALUES (?, ?, ?, ?, ?)",
+    [uuid.v4(), userId, lat, lng, currentDateTime],
     (err, result) => {
       if (err) {
         return res.status(500).send({
@@ -170,6 +183,7 @@ router.post("/create-post-location", (req, res, next) => {
     }
   );
 });
+
 router.get("/get-locations/:id", (req, res, next) => {
   const userId = req.params.id;
 
