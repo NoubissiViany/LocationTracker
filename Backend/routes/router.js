@@ -183,6 +183,7 @@ router.post("/create-post-location", (req, res, next) => {
     }
   );
 });
+
 router.get("/get-locations/:id", (req, res, next) => {
   const userId = req.params.id;
 
